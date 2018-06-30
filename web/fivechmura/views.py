@@ -6,7 +6,7 @@ from .models import Tweet
 
 # Create your views here.
 def index(request):
-    tweet_list = Tweet.objects.all()
+    tweet_list = Tweet.objects.order_by('-pub_date')
 
     template = loader.get_template('index.html')
     context = {
