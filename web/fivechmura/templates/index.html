@@ -1,0 +1,13 @@
+{% if tweet_list %}
+    <ul>
+    {% for tweet in tweet_list %}
+        <a href="/tweet/{{ tweet.id }}/">
+            <p>名前：{{ tweet.owner_name}}</p>
+            <p>{{ tweet.tweet_text}}</p>
+        </a>
+        <hr>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>つぶやきがありません</p>
+{% endif %}
