@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.utils import timezone
 from .models import Tweet
 
 # Create your views here.
@@ -23,5 +24,10 @@ def detail(request, tweet_id):
 
     return HttpResponse(template.render(context, request))
 
-def tweet(request, tweet_id):
-    return HttpResponse("You're tweet %s." % tweet_id)
+def tweet(request):
+    if request.POST['owner_name'] == '':
+        Tweet(tweet_text=request.POST['tweet_text'] , pub_date=timezone.now()).save()
+    # ひどい null の扱いがわからない
+    if request.POST['owner_name'] != '':
+        Tweet(owner_name=request.POST['owner_name'], tweet_text=request.POST['tweet_text'] , pub_date=timezone.now()).save()
+    return HttpResponseRedirect('/')

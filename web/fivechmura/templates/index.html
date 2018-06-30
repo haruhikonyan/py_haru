@@ -1,12 +1,13 @@
-<form method="POST" action="">
+<form action="tweet" method="post">
+    {% csrf_token %}
     <div>
-        名前：<input type="text"></input>
+        名前：<input type="text" name="owner_name" ></input>
     </div>
     <div>
-        <textarea name="msg" cols=100 rows=4>
+        <textarea name="tweet_text" cols=100 rows=4>
         </textarea>
     </div>
-        <input type="submit" value="送信できません">
+    <input type="submit" value="送信" />
 </form>
 {% if tweet_list %}
     <ul>

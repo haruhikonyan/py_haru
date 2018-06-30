@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     # ex: /tweet/5/
     path('tweet/<int:tweet_id>/', views.detail, name='detail'),
+    path('tweet', views.tweet, name='tweet'),
 ]
