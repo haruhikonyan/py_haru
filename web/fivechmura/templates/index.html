@@ -1,10 +1,10 @@
 <form action="tweet" method="post">
     {% csrf_token %}
     <div>
-        名前：<input type="text" name="owner_name" ></input>
+        名前：<input type="text" name="owner_name"></input>
     </div>
     <div>
-        <textarea name="tweet_text" cols=100 rows=4>
+        <textarea name="tweet_text" cols=100 rows=4 required="required">
         </textarea>
     </div>
     <input type="submit" value="送信" />
@@ -13,8 +13,11 @@
     <ul>
     {% for tweet in tweet_list %}
         <a href="/tweet/{{ tweet.id }}/">
-            <p>名前：{{ tweet.owner_name}}</p>
-            <p>{{ tweet.tweet_text}}</p>
+            <p>名前：{{ tweet.owner_name }}</p>
+            <p>{{ tweet.tweet_text }}</p>
+            <div style="text-align:right;">
+            <small>{{ tweet.pub_date }}</small>
+            </div>
         </a>
         <hr>
     {% endfor %}
