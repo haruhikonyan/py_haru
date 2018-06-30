@@ -6,7 +6,7 @@ from .models import Tweet
 
 # Create your views here.
 def index(request):
-    tweet_list = Tweet.objects.order_by('-pub_date')
+    tweet_list = Tweet.objects.order_by('-pub_date')[:20]
 
     template = loader.get_template('index.html')
     context = {
@@ -25,7 +25,7 @@ def detail(request, tweet_id):
     return HttpResponse(template.render(context, request))
 
 def tweet(request):
-    # null の扱いがわからない
+    # None設定してもdefaultの値が反映されない謎仕様
     if request.POST['owner_name'] == '':
         Tweet(tweet_text=request.POST['tweet_text'] , pub_date=timezone.now()).save()
     else:
