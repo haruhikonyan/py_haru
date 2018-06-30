@@ -25,9 +25,9 @@ def detail(request, tweet_id):
     return HttpResponse(template.render(context, request))
 
 def tweet(request):
+    # null の扱いがわからない
     if request.POST['owner_name'] == '':
         Tweet(tweet_text=request.POST['tweet_text'] , pub_date=timezone.now()).save()
-    # ひどい null の扱いがわからない
-    if request.POST['owner_name'] != '':
+    else:
         Tweet(owner_name=request.POST['owner_name'], tweet_text=request.POST['tweet_text'] , pub_date=timezone.now()).save()
     return HttpResponseRedirect('/')
